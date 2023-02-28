@@ -11,7 +11,7 @@ $FirstName = $User.firstname
 $Title = $User.jobtitle
 $Department = $User.department
 $OU = $User.ou
-$UserName = $User.logonname
+$UserName = $User.username
 $Email = $User.email
 $Phone = $User.telephonenumber
 $Street = $User.streetaddress
@@ -26,7 +26,8 @@ if (Get-ADUser -F {SamAccountName -eq $UserName})
 
 # If user does not exist
         else {
-            New-ADUser '
+            New-ADUser 
+            $details = @{
             -FirstName $FirstName
             -LastName $LastName
             -DisplayName "$FirstName $LastName" 
@@ -41,7 +42,7 @@ if (Get-ADUser -F {SamAccountName -eq $UserName})
             -City $City
             -State $State
             -Zip $Zip
-            -ChangePasswordAtLogon $True '
-
+            -ChangePasswordAtLogon $True 
+            }
         }
     }
