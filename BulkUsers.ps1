@@ -5,7 +5,8 @@ Import-Module activedirectory
 $Users = Import-csv <filepath>
 
 # CSV file variables and loop through details
-foreach ($User in $Users) {
+foreach ($User in $Users) 
+{
 $LastName = $User.lastname
 $FirstName = $User.firstname
 $Title = $User.jobtitle
@@ -28,21 +29,21 @@ if (Get-ADUser -F {SamAccountName -eq $UserName})
         else {
             New-ADUser 
             $details = @{
-            -FirstName $FirstName
-            -LastName $LastName
-            -DisplayName "$FirstName $LastName" 
-            -JobTitle $Title
-            -Department $Department
-            -Path $OU
-            -SamAccountName $UserName 
-            -UserPrincipalName "$UserName@corp.globexpower.com"
-            -Email $Email
-            -Telephone $Phone
-            -Street $Street
-            -City $City
-            -State $State
-            -Zip $Zip
-            -ChangePasswordAtLogon $True 
-            }
+            FirstName = $FirstName
+            LastName = $LastName
+            DisplayName = "$FirstName $LastName" 
+            JobTitle = $Title
+            Department = $Department
+            Path = $OU
+            SamAccountName = $UserName 
+            UserPrincipalName = "$UserName@corp.globexpower.com"
+            Email = $Email
+            Telephone = $Phone
+            Street = $Street
+            City = $City
+            State = $State
+            Zip = $Zip
+            ChangePasswordAtLogon = $True 
+            } #end details
         }
-    }
+}
