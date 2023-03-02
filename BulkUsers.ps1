@@ -7,42 +7,29 @@ $Users = Import-csv <filepath>
 # CSV file variables and loop through details
 foreach ($User in $Users) 
 {
-    $First = $User.firstname
-    $Last = $User.lastname
-    $Title = $User.jobtitle
-    $Department = $User.department
-    $OU = $User.ou
-    $UserName = $User.username
-    $Email = $User.email
-    $Phone = $User.telephonenumber
-    $Street = $User.streetaddress
-    $City = $User.city
-    $State = $User.state
-    $Zip = $User.zip
+    $Username = $User.SamAccountName
 
 # If user already exists
-if (Get-ADUser -F {SamAccountName -eq $UserName})
+if (Get-ADUser -F {SamAccountName -eq $Username})
     {
-        Write-Warning "A user with this username $UserName already exists." }
+        Write-Warning "A user with this username $Username already exists." }
 
 # If user does not exist
         else {
             New-ADUser 
             $details = @{
-                SamAccountName = $UserName 
-                FirstName = $First
-                LastName = $Last
-                DisplayName = "$First $Last" 
-                JobTitle = $Title
-                Department = $Department
-                Path = $OU
-                UserPrincipalName = "$UserName@corp.globexpower.com"
-                Email = $Email
-                Telephone = $Phone
-                Street = $Street
-                City = $City
-                State = $State
-                Zip = $Zip
+                FirstName = $User.First
+                LastName = $User.Last
+                JobTitle = $User.Title
+                Department = $User.Department
+                OU = $User.OU
+                Username = $User.UserName
+                Email = $User.Email
+                Telephone = $User.Phone
+                Street = $User.Street
+                City = $User.City
+                State = $User.State
+                Zip = $User.Zip
                 ChangePasswordAtLogon = $True 
             } #end details
         }
