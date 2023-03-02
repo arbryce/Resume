@@ -16,7 +16,7 @@ if (Get-ADUser -F {SamAccountName -eq $Username})
 
 # If user does not exist
         else {
-            New-ADUser 
+            New-ADUser -Name "$($user.First) $($user.Last)"
             $details = @{
                 FirstName = $User.First
                 LastName = $User.Last
