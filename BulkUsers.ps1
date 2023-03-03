@@ -2,7 +2,7 @@
 Import-Module activedirectory
 
 # Set variable
-$Users = Import-csv <filepath>
+$Users = Import-csv C:\Users\Administrator\Documents\Test\users1.csv
 
 # CSV file variables and loop through details
 foreach ($User in $Users) 
@@ -16,21 +16,21 @@ if (Get-ADUser -F {SamAccountName -eq $Username})
 
 # If user does not exist
         else {
-            New-ADUser -Name "$($user.First) $($user.Last)"
             $details = @{
-                FirstName = $User.First
-                LastName = $User.Last
-                JobTitle = $User.Title
+                Name = $User.FullName
+                Givenname = $User.First
+                Surname = $User.Last
+                Title = $User.Title
                 Department = $User.Department
-                OU = $User.OU
-                Username = $User.UserName
+                SamAccountName = $User.SamAccountName
+                DisplayName = $User.UserName
                 Email = $User.Email
-                Telephone = $User.Phone
                 Street = $User.Street
                 City = $User.City
                 State = $User.State
-                Zip = $User.Zip
+                PostalCode = $User.Zip
                 ChangePasswordAtLogon = $True 
             } #end details
+            New-ADUser @details
         }
 }
