@@ -1,3 +1,5 @@
+#Create bulk users in AD 
+
 # Import AD module for cmdlets
 Import-Module activedirectory
 
